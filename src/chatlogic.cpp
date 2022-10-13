@@ -5,6 +5,7 @@
 #include <iterator>
 #include <tuple>
 #include <algorithm>
+#include <memory>
 
 #include "graphedge.h"
 #include "graphnode.h"
@@ -161,17 +162,17 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                             auto childNode = std::find_if(_nodes.begin(), _nodes.end(), [&childToken](std::unique_ptr<GraphNode> &node) { return node->GetID() == std::stoi(childToken->second); }); // Task 3
 
                             // create new edge
-                            GraphEdge *edge = new GraphEdge(id);
+                            std::unique_ptr<GraphEdge> edge = std::make_unique<GraphEdge>(id); // Task 4
                             edge->SetChildNode((*childNode).get()); // Task 3
                             edge->SetParentNode((*parentNode).get()); // Task 3
-                            _edges.push_back(edge);
+                            _edges.push_back(edge.get()); // Task 4
 
                             // find all keywords for current node
-                            AddAllTokensToElement("KEYWORD", tokens, *edge);
+                            AddAllTokensToElement("KEYWORD", tokens, *edge.get());
 
                             // store reference in child node and parent node
-                            (*childNode).get()->AddEdgeToParentNode(edge); // Task 3
-                            (*parentNode).get()->AddEdgeToChildNode(edge); // Task 3
+                            (*childNode).get()->AddEdgeToParentNode(edge.get()); // Task 3, Task 4
+                            (*parentNode).get()->AddEdgeToChildNode(std::move(edge)); // Task 3, Task 4
                         }
 
                         ////
