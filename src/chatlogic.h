@@ -18,7 +18,6 @@ private:
 
     // data handles (owned)
     std::vector<std::unique_ptr<GraphNode>> _nodes; // Task 3
-    std::vector<GraphEdge *> _edges;
 
     ////
     //// EOF STUDENT CODE

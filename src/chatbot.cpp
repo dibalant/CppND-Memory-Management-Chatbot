@@ -54,7 +54,7 @@ ChatBot::ChatBot(const ChatBot &source) {
     _rootNode = source._rootNode; 
     _chatLogic = source._chatLogic;
 
-    _chatLogic->SetChatbotHandle(this);
+    _chatLogic->SetChatbotHandle(this); // Task 5
 }
 
 // Copy assignment operator
@@ -70,7 +70,7 @@ ChatBot& ChatBot::operator= (const ChatBot &source) {
     _rootNode = source._rootNode; 
     _chatLogic = source._chatLogic;
 
-    _chatLogic->SetChatbotHandle(this);
+    _chatLogic->SetChatbotHandle(this); // Task 5
 
     return *this;
 }
@@ -89,7 +89,7 @@ ChatBot::ChatBot(ChatBot &&source) {
     source._rootNode = nullptr;
     source._chatLogic = nullptr;
 
-    _chatLogic->SetChatbotHandle(this);
+    _chatLogic->SetChatbotHandle(this); // Task 5
 }
 
 // Move assignment operator
@@ -110,7 +110,7 @@ ChatBot& ChatBot::operator= (ChatBot &&source) {
     source._rootNode = nullptr;
     source._chatLogic = nullptr;
 
-    _chatLogic->SetChatbotHandle(this);
+    _chatLogic->SetChatbotHandle(this); // Task 5
 
     return *this;
 }
