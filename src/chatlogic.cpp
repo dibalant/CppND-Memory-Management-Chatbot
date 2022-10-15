@@ -18,12 +18,6 @@ ChatLogic::ChatLogic()
     //// STUDENT CODE
     ////
 
-    // create instance of chatbot
-   // _chatBot = new ChatBot("../images/chatbot.png");
-
-    // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
-   // _chatBot->SetChatLogicHandle(this);
-
     ////
     //// EOF STUDENT CODE
 }
@@ -32,22 +26,6 @@ ChatLogic::~ChatLogic()
 {
     //// STUDENT CODE
     ////
-
-    // delete chatbot instance
-    //delete _chatBot;
-
-    // Task 3 - no need to delete bc now using smart pointers!
-    // delete all nodes
-   /* for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
-    {
-        delete *it;
-    }*/
-
-    // delete all edges
-    for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
-    {
-        delete *it;
-    }
 
     ////
     //// EOF STUDENT CODE
@@ -165,7 +143,6 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                             std::unique_ptr<GraphEdge> edge = std::make_unique<GraphEdge>(id); // Task 4
                             edge->SetChildNode((*childNode).get()); // Task 3
                             edge->SetParentNode((*parentNode).get()); // Task 3
-                            _edges.push_back(edge.get()); // Task 4
 
                             // find all keywords for current node
                             AddAllTokensToElement("KEYWORD", tokens, *edge.get());
@@ -217,6 +194,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
         }
     }
 
+    // Task 5
     // add chatbot to graph root node
     ChatBot chatBot("../images/chatbot.png");
     chatBot.SetChatLogicHandle(this);
